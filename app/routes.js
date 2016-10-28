@@ -14,12 +14,12 @@ import ViewNoteContent from './components/view_notecontent'
 export default (
   <Route path='/' component={App} >
     <IndexRoute component={ViewHomePage} />
-    <Route path='notes/:id' component={ViewNoteContent} />
-    <Route path='editNote/:id' component={ViewNoteIndex} />
-    <Route path='folders/:id' component={ViewFolder} />
     <Route path='signup' component={ViewSignUp} />
     <Route path='signin' component={ViewSignIn} />
     <Route path='all' component={ViewAllFiles} />
     <Route path='folders' component={ViewFolders} />
+    <Route path='folders/:id' component={ViewFolder} />
+    <Route path='notes/:id' component={ViewNoteContent} />
+    <Route path='editNote/:id' component={ViewNoteIndex} />
   </Route>
 )
