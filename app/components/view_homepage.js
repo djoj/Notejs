@@ -34,6 +34,7 @@ class HomePage extends Component {
           onLeftIconButtonTouchTap={this.handleToggle.bind(this)}
           iconElementRight={
             <span>
+              <FlatButton label='Donate' className='donateButton' containerElement={<Link to='donate' />} />
               <FlatButton label='Sign in' className='authButtons' containerElement={<Link to='signin' />} />
               <FlatButton label='Sign up' className='authButtons' containerElement={<Link to='signup' />} />
             </span>
