@@ -1,4 +1,6 @@
 const express = require('express')
+const http = require('http')
+const uuid = require('node-uuid')
 const logger = require('morgan')
 const bodyParser = require('body-parser')
 const path = require('path')
@@ -9,9 +11,10 @@ const PORT = process.env.PORT || 8000
 
 const app = express()
 
+
 app.use(logger('dev'))
 app.use(bodyParser.json())
-app.use(cors())
+app.use(cors({credentials: true, origin: true}))
 app.use(session({
   secret: 'notejs2016',
   resave: false,
@@ -22,5 +25,9 @@ app.use(session({
 app.use('/', express.static(path.join(__dirname, '../public')))
 
 app.use('/api', rootRouter)
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/index.html'))
+})
 
 app.listen(PORT, () => console.log('Server running on port', PORT))
