@@ -1,4 +1,6 @@
 const express = require('express')
+const http = require('http')
+const uuid = require('node-uuid')
 const logger = require('morgan')
 const bodyParser = require('body-parser')
 const path = require('path')
@@ -35,10 +37,9 @@ passport.use(new GitHubStrategy({
   }
 ))
 
-
 app.use(logger('dev'))
 app.use(bodyParser.json())
-app.use(cors())
+app.use(cors({credentials: true, origin: true}))
 app.use(session({
   secret: 'notejs2016',
   resave: false,
@@ -61,7 +62,5 @@ function(req, res) {
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'))
 })
-
-
 
 app.listen(PORT, () => console.log('Server running on port', PORT))
