@@ -28,7 +28,7 @@ passport.deserializeUser(function(obj, done) {
 passport.use(new GitHubStrategy({
     clientID: githubId,
     clientSecret: githubSecret,
-    callbackURL: "http://127.0.0.1:8000/auth/github/callback"
+    callbackURL: "https://notejs-legacy.herokuapp.com/auth/github/callback"
 
   },
   function(accessToken, refreshToken, profile, done) {
