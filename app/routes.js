@@ -25,6 +25,5 @@ export default (
     <Route path='folders' component={ViewFolders} />
     <Route path='donate' component={ViewDonate} />
     <Route path='donate/thankyou' component={ViewThankYou} />
-
   </Route>
 )

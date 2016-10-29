@@ -1,47 +1,74 @@
 import React, { Component, PropTypes } from 'react'
-import { reduxForm } from 'redux-form'
-// import { fetchUser } from '../actions/action_user'
 import { Link } from 'react-router'
-import axios from 'axios'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import AppBar, {muiTheme} from 'material-ui/AppBar'
+import FlatButton from 'material-ui/FlatButton'
+import injectTapEventPlugin from 'react-tap-event-plugin'
+import MenuItem from 'material-ui/MenuItem'
+import Drawer from 'material-ui/Drawer'
 
+const navStyle = {
+  backgroundColor: '#1E88E5',
+  fontFamily: 'sans-serif'
+}
+
+const navButtons = {
+  color: 'white',
+  marginTop: 5,
+  backgroundColor: '#1E88E5'
+}
+
+const body = {
+  margin: 50
+}
 
 class ViewThankYou extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
-      clicked: false,
-      value: '',
-      approval_url: ''
-    };
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    }
   }
 
-  handleChange(event) {
-    this.setState({value: event.target.value})
+  handleToggle () {
+    this.setState({open: !this.state.open})
   }
 
-  handleSubmit(event) {
-    // alert('Text field value is: ' + this.state.value);
-    axios.get('/api/donate/create')
-     .then((response) => {
-      //  this.state.approval_url = response.data.approval_url
-       console.log(response.data.approval_url, 'approval url')
-       this.setState({approval_url: response.data.approval_url})
-       this.setState({clicked: true})
-       console.log(this.state.approval_url)
-     })
-     .catch((error) => {
-       console.log(error);
-     });
+  handleClose () {
+    this.setState({open: false})
   }
 
-  render() {
+  render () {
     return (
       <div>
-        <h1>Thank you for supporting Notejs</h1>
+        <AppBar
+          title='NoteJS'
+          iconClassNameRight='muidocs-icon-navigation-expand-more'
+          onLeftIconButtonTouchTap={this.handleToggle.bind(this)}
+          iconElementRight={
+            <span>
+              <FlatButton label='Donate' className='donateButton' containerElement={<Link to='donate' />} style={navButtons} />
+              <FlatButton label='Sign in' className='authButtons' containerElement={<Link to='signin' />} style={navButtons} />
+              <FlatButton label='Sign up' className='authButtons' containerElement={<Link to='signup' />} style={navButtons} />
+            </span>
+          }
+          style={navStyle}
+        />
+        <Drawer
+          docked={false}
+          width={200}
+          open={this.state.open}
+          onRequestChange={(open) => this.setState({open})}
+        >
+          <MenuItem >About Us</MenuItem>
+          <MenuItem >Career Opportunities</MenuItem>
+          <MenuItem >Contact Us</MenuItem>
+        </Drawer>
+        <div style={body}>
+          <h1>Thank You</h1>
+          <p>Your support will help Notejs continue providing excellent service and develop new features.</p>
+        </div>
       </div>
-    );
+    )
   }
 }
 
