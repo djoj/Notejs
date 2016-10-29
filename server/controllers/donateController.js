@@ -6,8 +6,8 @@ donateController.CREATE_PAYMENT = (req, res) => {
   const payReq = {
     'intent': 'sale',
     'redirect_urls': {
-      'return_url': 'http://localhost:8000/api/donate/thankyou',
-      'cancel_url': 'http://localhost:8000/donate'
+      'return_url': 'https://notejs-legacy.herokuapp.com/api/donate/thankyou',
+      'cancel_url': 'https://notejs-legacy.herokuapp.com/donate'
     },
     'payer': {
       'payment_method': 'paypal'
