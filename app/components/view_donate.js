@@ -149,9 +149,14 @@ class ViewDonate extends React.Component {
             onChange={this.handleChange}
             style={style} />
 
-          <a href={this.state.approval_url}>
-            <RaisedButton className='noteBottomButtons' label='Confirm Donation' primary={true} />
-          </a>
+          {this.state.approval_url ? (
+            <a href={this.state.approval_url}>
+              <RaisedButton className='noteBottomButtons' label='Confirm Donation' primary={true} />
+            </a>
+          ) : (
+            <RaisedButton label='Confirm Donation' disabled={true} />
+          )}
+
           <br />(This will take you to PayPal to confirm your donation.)
         </div>
       </div>
